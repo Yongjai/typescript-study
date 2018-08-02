@@ -36,7 +36,7 @@ Javascript는 엄격한 규칙이 없고, 사용하기 쉽고(?), 개발자가 �
 
 tsconfig.json 파일을 생성해 줍니다. 이 파일에서는 타입스크립트에게 어떻게 js로 변환하는지 알려주고 몇몇 옵션을 주게 됩니다.
 
-```json
+```js
 // tsconfig.json
 {
     "compilerOPtions": {
@@ -44,7 +44,7 @@ tsconfig.json 파일을 생성해 줍니다. 이 파일에서는 타입스크립
         "module": "commonjs",
         // 어떤 버전의 js로 컴파일 되고 싶은지
         "target": "ES2015",
-        //sourcemap 처리를 하고 싶은지
+        // sourcemap 처리를 하고 싶은지
         "sourceMap": true
     },
     // 어떤 파일들이 컴파일 과정에 포함되는지 알려주며, 컴파일 과정에서 포함할 파일의 배열을 적으면 됨.
@@ -65,12 +65,12 @@ alert("hello");
 
 이후에 할 일은 index.ts 파일을 index.js로 컴파일 하는 과정이 필요합니다. 터미널에서 `tsc` 명령어를 통해 index.ts 파일에 있는 코드를 컴파일해서 index.js와 index.js.map을 만들어 줍니다. 하지만 tsc를 매번 사용하면 번거롭기 때문에 yarn start를 사용하면 바로 타입스크립트가 컴파일 되서 실행이 되도록 만들어 주도록 합시다. 
 
-```json
+```js
 // package.json
 
 {
     ...
-   	// 추가로 적어줄 것들
+    // 추가로 적어줄 것들
     "script": {
     	"start": "node index.js",
     	"prestart": "tsc"
