@@ -175,3 +175,55 @@ export {};
 ```
 
 위와 같이 수정하게 되면 코드가 정상적으로 동작하게 됩니다.
+
+
+
+## Interface
+
+> 타입스크립트로 object를 사용해야 한다면 어떻게 해야 할까요?
+
+타입스크립트가 object를 이해할 수 있게 해야하며, 그 object가 올바른 type인지를 분별할 수 있어야 합니다.
+
+
+
+```typescript
+const person = {
+    name: "용자이",
+    age: "25",
+    gender: "남자",
+};
+
+const myInfo = (name: string, age: number, gender: string): void => {
+    console.log("Hi!, My name is ${name}. I'm ${age} years old and ${gender}.");
+}
+myInfo(person);
+
+export {};
+```
+
+이런 코드를 작성했다면 어떻게 될까요? 물론 동작하지 않습니다. 이유는 위와 같이 3개의 인자를 넘겨줘야 하는데 하나만 넘기고 있기 때문입니다. 그렇다면 어떻게 해결해야 할까요? 바로 Interface를 사용하는 방법입니다.
+
+
+
+```typescript
+interface Human {
+    name: string;
+    age: number;
+    gender: string;
+}
+
+const person = {
+    name: "용자이",
+    gender: "남자",
+    age: "25",
+};
+
+const myInfo = (person: Human): string => {
+    console.log("Hi!, My name is ${person.name}. I'm ${person.age} years old and ${person.gender}.");
+}
+myInfo(person);
+
+export {};
+```
+
+이렇게 인터페이스를 만들어 주고 인자를 하나하나 파싱하는 것이 아니라 타입을 Human으로 지정함으로서 해결해줄 수 있습니다. 위와 같은 방식은 인터페이스 기능이 없는 자바스크립트에서는 때문에 동작하지 않습니다. 만약에 인터페이스를 자바스크립트에서도 사용하고 싶다면 Class를 이용하는 방법이 있습니다.
