@@ -226,4 +226,71 @@ myInfo(person);
 export {};
 ```
 
-이렇게 인터페이스를 만들어 주고 인자를 하나하나 파싱하는 것이 아니라 타입을 Human으로 지정함으로서 해결해줄 수 있습니다. 위와 같은 방식은 인터페이스 기능이 없는 자바스크립트에서는 때문에 동작하지 않습니다. 만약에 인터페이스를 자바스크립트에서도 사용하고 싶다면 Class를 이용하는 방법이 있습니다.
+이렇게 인터페이스를 만들어 주고 인자를 하나하나 파싱하는 것이 아니라 타입을 Human으로 지정함으로서 해결해줄 수 있습니다. 위와 같은 방식은 인터페이스 기능이 없는 자바스크립트에서는 때문에 동작하지 않습니다. 만약에 인터페이스를 자바스크립트에서도 사용하고 싶다면 Class를 이용하는 방법이 있습니다. 클래스는 타입스크립트에서도 강력하게 사용할 수 있습니다.
+
+
+
+## Class
+
+> 타입스크립트에서 클래스는 코드를 컨트롤할 때 매우 유용하게 사용할 수 있습니다.
+
+자바스크립트에서는 클래스의 속성을 생각할 필요가 없습니다. 하지만 타입스크립트에서는 클래스가 어떤 속성을 가져야하는지 선언해줄 필요가 있습니다. 또한 그 속성의 권한도 설정을 해줘야 합니다. 예시를 보겠습니다.
+
+```typescript
+class Human {
+    public name: string;
+    public gender: string;
+    public age: number;
+    constructor(name: string, gender: string, age: number) {
+        // 이 클래스의 name은 생성자의 name과 같다는 의미
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+    }
+}
+
+const yongjai = new Human("yongjai", "male", 25);
+
+const myInfo = (person: Human): string => {
+    console.log("Hi!, My name is ${person.name}. I'm ${person.age} years old and ${person.gender}.");
+}
+
+console.log(myInfo(yongjai));
+
+export {};
+```
+
+`constuctor`는 생성자로 메소드인데 클래스가 시작될 때마다.. 즉, 클래스로부터 객체를 만들 때마다 호출됩니다. 그리고 생성자에 argument로 name, gender, age를 줬습니다. 
+
+
+
+```typescript
+class Human {
+    public name: string;
+    public gender: string;
+    private age: number;
+    constructor(name: string, gender: string, age: number) {
+        // 이 클래스의 name은 생성자의 name과 같다는 의미
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+    }
+}
+
+const yongjai = new Human("yongjai", "male", 25);
+
+const myInfo = (person: Human): string => {
+    console.log("Hi!, My name is ${person.name}. I'm ${person.age} years old and ${person.gender}.");
+}
+
+console.log(myInfo(yongjai));
+
+export {};
+```
+
+만약에 age에 private 속성을 주게 되면 어떻게 될까요?  age 프로퍼티는 private 속성이라서 Human 클래스 내부에서만 접근가능하다는 에러가 발생합니다. 이게 바로 타입스크립트의 장점으로 컴파일 자체를 하지 않습니다.
+
+이렇게 개발자가 직접 특정 변수를 보호할 수 있게 속성을 가지고 클래스 밖에서 호출이 가능하게 또는 불가능하게 만들 수 있습니다.
+
+
+
